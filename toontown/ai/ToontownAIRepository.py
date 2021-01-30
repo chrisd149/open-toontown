@@ -1,3 +1,4 @@
+import json
 from direct.directnotify import DirectNotifyGlobal
 from panda3d.core import *
 
@@ -115,6 +116,14 @@ class ToontownAIRepository(ToontownInternalRepository):
         # Make our district available, and we're done.
         self.district.b_setAvailable(True)
         self.notify.info('Done.')
+        """
+        # Load district into population.json
+        file = open('population.json', 'r')
+        data = json.load(file)
+        with open("population.json", 'w') as e:
+            data['districts'][self.districtName] = 0
+            e.write(json.dumps(data))
+        """
 
     def createLocals(self):
         """
@@ -431,9 +440,18 @@ class ToontownAIRepository(ToontownInternalRepository):
 
     def incrementPopulation(self):
         self.districtStats.b_setAvatarCount(self.districtStats.getAvatarCount() + 1)
+        self.writePopulation()
 
     def decrementPopulation(self):
         self.districtStats.b_setAvatarCount(self.districtStats.getAvatarCount() - 1)
+        self.writePopulation()
+
+    def writePopulation(self):
+        file = open('population.json', 'r')
+        data = json.load(file)
+        with open("population.json", 'w') as e:
+            data['totalPopulation'] = str(self.districtStats.getAvatarCount())
+            e.write(json.dumps(data))
 
     def allocateZone(self, owner=None):
         zoneId = self.zoneAllocator.allocate()

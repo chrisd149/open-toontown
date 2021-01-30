@@ -14,7 +14,10 @@ from direct.showbase import ExceptionVarDump
 import math
 import sys
 import time
+import os
 import gc
+import json
+
 
 class AIBase:
     notify = directNotify.newCategory('AIBase')
@@ -68,6 +71,11 @@ class AIBase:
         if wantFakeTextures:
             loadPrcFileData('aibase', 'textures-header-only 1')
         self.wantPets = self.config.GetBool('want-pets', 1)
+        with open("population.json", 'w+') as e:
+            data = dict()
+            data['totalPopulation'] = 0
+            # data['districts'] = dict()
+            e.write(json.dumps(data))
         if self.wantPets:
             if game.name == 'toontown':
                 from toontown.pets import PetConstants
