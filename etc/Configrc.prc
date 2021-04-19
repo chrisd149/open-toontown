@@ -26,10 +26,10 @@ depth-bits 24
 early-random-seed 1
 respect-prev-transform 1
 default-directnotify-level info
-notify-level-collide warning
-notify-level-chan warning
-notify-level-gobj warning
-notify-level-loader warning
+notify-level-collide info
+notify-level-chan info
+notify-level-gobj info
+notify-level-loader info
 notify-timestamp #t
 notify-integrate #f
 default-model-extension .bam

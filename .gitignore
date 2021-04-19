@@ -5,7 +5,6 @@
 resources/
 news/
 sign/
-whitelist/
 *.so
 *.DS_Store
 *.jpg
@@ -13,3 +12,6 @@ whitelist/
 venv/
 *.buildings
 *.trackRecords
+population.json
+astron/libuv.dll
+astron/astrond.exe
